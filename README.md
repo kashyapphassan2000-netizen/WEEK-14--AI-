@@ -12,8 +12,10 @@ baseline, and benchmarks against `torch.nn.functional.scaled_dot_product_attenti
   head dims 16–128, ragged N, strided inputs. Runs on GPU, or on CPU through the
   Triton interpreter (CI does this on every push).
 
-New here? Read **[docs/decisions.md](docs/decisions.md)**. It walks through how
-and why this was built, step by step, in plain English.
+New here? Start with **[NOTES.md](NOTES.md)**: a complete beginner's walkthrough from
+creating the virtual environment to tagging the release, with every term explained and an
+honest status of what is and isn't verified. Then read
+**[docs/decisions.md](docs/decisions.md)** for why each design choice was made.
 
 ## Quickstart
 
@@ -70,7 +72,7 @@ Forward, fp16, B=1, H=16, D=64, GPU: _TBD_
 | flash forward vs SDPA, rtol=atol=1e-2 | ✅ pass | run `pytest` |
 | LSE vs `torch.logsumexp` | ✅ pass | run `pytest` |
 | dQ, dK, dV vs SDPA, rtol=atol=2e-2 | ✅ pass | run `pytest` |
-| bf16 | skipped (interpreter `tl.dot` is wrong for bf16) | run `pytest` |
+| bf16 | skipped (interpreter `tl.dot` is wrong for bf16) | run `pytest` on Ampere+ (A100, RTX 30xx/40xx); skipped on T4 |
 | PASS gate: forward at N=2048, D=64 | skipped (GPU size) | run `pytest` |
 
 ## Layout
