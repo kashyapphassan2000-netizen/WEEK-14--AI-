@@ -2,7 +2,7 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from helpers import ON_GPU, rand_qkv
+from helpers import BF16_OK, ON_GPU, rand_qkv
 from kernels.attn_bwd import flash_attention
 
 SHAPES = (
@@ -49,7 +49,7 @@ def test_bwd_sum_loss_as_in_guide():
         torch.testing.assert_close(got, want, rtol=2e-2, atol=2e-2)
 
 
-@pytest.mark.skipif(not ON_GPU, reason="interpreter tl.dot is wrong for bf16")
+@pytest.mark.skipif(not BF16_OK, reason="needs a GPU with bf16 (A100/RTX 30xx+); interpreter tl.dot is wrong for bf16")
 @pytest.mark.parametrize("causal", [False, True])
 def test_bwd_bf16(causal):
     q, k, v = rand_qkv(1, 4, 512, 64, dtype=torch.bfloat16)

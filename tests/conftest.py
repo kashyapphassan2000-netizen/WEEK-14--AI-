@@ -13,3 +13,7 @@ if not ON_GPU:
     os.environ.setdefault("TRITON_INTERPRET", "1")
 
 DEVICE = "cuda" if ON_GPU else "cpu"
+
+# bf16 tensor cores exist from Ampere (compute capability 8.x: A100, RTX 30xx/40xx) on.
+# A T4 (7.5) or V100 (7.0) has none, so bf16 tests only run on 8.x+.
+BF16_OK = ON_GPU and torch.cuda.get_device_capability()[0] >= 8

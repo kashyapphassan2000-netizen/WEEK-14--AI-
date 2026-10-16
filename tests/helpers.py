@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-from conftest import DEVICE, ON_GPU  # noqa: F401
+from conftest import BF16_OK, DEVICE, ON_GPU  # noqa: F401
 
 
 def rand_qkv(B, H, N, D, dtype=torch.float16, requires_grad=False):

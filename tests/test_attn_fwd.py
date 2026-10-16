@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from helpers import DEVICE, ON_GPU, rand_qkv, reference_attention
+from helpers import BF16_OK, DEVICE, ON_GPU, rand_qkv, reference_attention
 from kernels.attn_fwd import flash_attn_fwd
 
 SHAPES = (
@@ -42,8 +42,9 @@ def test_flash_fwd_strided():
 
 
 # Triton's CPU interpreter computes tl.dot on bf16 inputs incorrectly (it is a
-# numpy emulation with no bf16 type), so this one only runs on a real GPU.
-@pytest.mark.skipif(not ON_GPU, reason="interpreter tl.dot is wrong for bf16")
+# numpy emulation with no bf16 type), and pre-Ampere GPUs have no bf16 tensor
+# cores, so this only runs on an Ampere-or-newer GPU.
+@pytest.mark.skipif(not BF16_OK, reason="needs a GPU with bf16 (A100/RTX 30xx+); interpreter tl.dot is wrong for bf16")
 @pytest.mark.parametrize("causal", [False, True])
 def test_flash_fwd_bf16(causal):
     q, k, v = rand_qkv(2, 4, 512, 64, dtype=torch.bfloat16)
