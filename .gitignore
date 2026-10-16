@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.log
+.cache/
+.pytest_cache/
+.DS_Store
+.vscode/settings.json
+*.png
+!bench/results/*.png
