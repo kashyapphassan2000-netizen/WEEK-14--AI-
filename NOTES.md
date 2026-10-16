@@ -7,6 +7,10 @@ check the [Glossary](#glossary) at the bottom.
 This is written to be **brutally honest**. Where something is not done, not verified,
 or harder than it looks, it says so plainly.
 
+> **Want to build it yourself, file by file?** Follow **[NOTES_IMPLEMENTATION.md](NOTES_IMPLEMENTATION.md)**.
+> It starts from an empty folder and walks through every command and every piece of code,
+> with an explanation of each.
+
 ---
 
 ## Table of contents

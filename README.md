@@ -14,7 +14,9 @@ baseline, and benchmarks against `torch.nn.functional.scaled_dot_product_attenti
 
 New here? Start with **[NOTES.md](NOTES.md)**: a complete beginner's walkthrough from
 creating the virtual environment to tagging the release, with every term explained and an
-honest status of what is and isn't verified. Then read
+honest status of what is and isn't verified. To build the whole thing yourself from an
+empty folder, file by file with every piece of code explained, follow
+**[NOTES_IMPLEMENTATION.md](NOTES_IMPLEMENTATION.md)**. Then read
 **[docs/decisions.md](docs/decisions.md)** for why each design choice was made.
 
 ## Quickstart
